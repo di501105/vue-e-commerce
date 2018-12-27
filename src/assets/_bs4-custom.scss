@@ -1,0 +1,25 @@
+.navbar-toggler {
+  border: none;
+}
+
+.btn-xl {
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $font-size-xl, $btn-line-height-lg, $btn-border-radius-lg);
+}
+
+.btn-primary-lighter {
+  @include button-variant($primary-200, $primary-200,);
+  color: theme-color('primary');
+  letter-spacing: 1px;
+  font-weight: bolder;
+  &:hover {
+    color: theme-color('primary');
+  }
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: theme-color('primary');
+  }
+}
+
+.btn-icon-light {
+  @include button-variant($white, $primary-200);
+}

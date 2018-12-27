@@ -52,7 +52,7 @@ export default {
   },
 };
 </script>
- <style scope>
+<style scope>
 .message-alert {
   position: fixed;
   max-width: 50%;

@@ -126,8 +126,7 @@
       
         <div class="form-group">
           <label for="username">收件人姓名</label>
-          <input type="text" class="form-control" name="name" id="username" :class="{'is-invalid': errors.has('name')}"
-            v-model="form.user.name" v-validate="'required'" placeholder="輸入姓名">
+          <input type="text" class="form-control" name="name" id="username" :class="{'is-invalid': errors.has('name')}" v-model="form.user.name" v-validate="'required'" placeholder="輸入姓名">
           <span class="text-danger" v-if="errors.has('name')">姓名欄位不得留空</span>
         </div>
       
@@ -260,7 +259,7 @@ export default {
           this.$http.post(url, {data:order}).then((response) => {
             console.log('訂單已建立', response);
             if (response.data.success) {
-              vm.$router.push(`/customer_checkout/${response.data.orderId}`)
+              vm.$router.push(`/dashboard/customer_checkout/${response.data.orderId}`)
             }
             // this.getCart();
             vm.isLoading = false;

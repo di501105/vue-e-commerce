@@ -1,0 +1,39 @@
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .product-image {
+    height: 315px;
+    background-size: cover;
+    background-position: center center;
+  }
+  .product-body {
+    border: 1px solid $primary-200;
+  }
+
+  .product-tag {
+    writing-mode: vertical-lr;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    padding: 15px 10px;
+    background-color: $primary;
+    color: white;
+    letter-spacing: 5px;
+  }
+
+  .product-name, .product-price {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .product-name {
+    border-right: 1px solid $primary-200;
+  }
+
+  .product-favorite {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+  }
+}

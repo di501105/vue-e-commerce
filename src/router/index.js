@@ -1,12 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
-import Dashboard from '@/components/Dashboard'
-import Login from '@/components/pages/Login'
-import Products from '@/components/pages/Products'
-import Coupons from '@/components/pages/Coupons'
-import CustomerOrder from '@/components/pages/CustomerOrder'
-import CustomerCheckout from '@/components/pages/CustomerCheckout'
+import Home from '@/components/pages/Home';
+import Shopping from '@/components/pages/Shopping';
+import Dashboard from '@/components/pages/Dashboard';
+import Login from '@/components/pages/Login';
+import Products from '@/components/pages/Products';
+import Cart from '@/components/pages/Cart';
+import Checkout from '@/components/pages/Checkout';
+import Order from '@/components/pages/Order';
+import Coupons from '@/components/pages/Coupons';
+import CustomerOrder from '@/components/pages/CustomerOrder';
+import CustomerCheckout from '@/components/pages/CustomerCheckout';
 
 Vue.use(Router)
 
@@ -23,9 +28,34 @@ export default new Router({
     //   meta: { requiresAuth: true }
     // },
     {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/shopping',
+      name: 'Shopping',
+      component: Shopping
+    },
+    {
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart,
+    },
+    {
+      path: '/checkout',
+      name: 'Checkout',
+      component: Checkout,
+    },
+    {
+      path: '/order/:orderId',
+      name: 'Order',
+      component: Order,
     },
     {
       path: '/admin',
@@ -47,7 +77,7 @@ export default new Router({
       ],
     },
     {
-      path: '/',
+      path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
       children: [

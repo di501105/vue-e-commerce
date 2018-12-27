@@ -1,0 +1,30 @@
+.section {
+  .section-vt-content {
+    max-height: 420px;
+    line-height: 2;
+    @include media-breakpoint-up(lg) {
+      line-height: 2.5;
+    }
+    @include media-breakpoint-down(lg) {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+  }
+  .section-image {
+    min-height: 250px;
+    @include media-breakpoint-up(lg) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+    @include media-breakpoint-down(lg) {
+      margin-right: -10px;
+      margin-left: -10px;
+    }
+  }
+  .section-overflow-block {
+    @include media-breakpoint-up(lg) {
+      margin-top: -20px;
+      margin-bottom: -20px;
+    }
+  }
+}

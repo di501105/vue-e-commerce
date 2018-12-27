@@ -1,0 +1,15 @@
+.favorite-checked-display {
+  cursor: pointer;
+  .favorite-checkbox, .favorite {
+    display: none;
+  }
+
+  .favorite-checkbox:checked {
+    ~ .favorite {
+      display: block;
+    }
+    ~ .unfavorite {
+      display: none;
+    }
+  }
+}

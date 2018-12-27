@@ -1,0 +1,54 @@
+//background
+.bg-cover {
+  background-size: cover;
+  background-position: center center;
+}
+
+//copyright
+.copyright {
+  @include media-breakpoint-down(xs) {
+    font-size: $font-size-sm;
+  }
+}
+
+//index four sides
+.four-sides {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+//index intro image
+.intro-max-width {
+  max-width: 50%;
+}
+
+.z-index--1 {
+  z-index: -1;
+}
+
+//writing mode
+.writing-vertical {
+  writing-mode: vertical-rl;
+}
+.writing-lg-vertical {
+  @include media-breakpoint-up(lg) {
+    writing-mode: vertical-rl;
+  }
+}
+
+
+.bg-primary-200 {
+  background-color: $primary-200;
+}
+.text-primary-100 {
+  color: $primary-100 !important;
+}
+.text-primary-200 {
+  color: $primary-200 !important;
+}
+.border-primary-200 {
+  border-color: $primary-200 !important;
+}

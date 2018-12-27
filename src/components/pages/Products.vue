@@ -39,7 +39,7 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <!-- <nav aria-label="Page navigation example">
       <ul class="pagination">
         <li class="page-item" :class="{'disabled': !pagination.has_pre}">
           <a class="page-link" href="#" aria-label="Previous" @click.prevent="getPorducts(pagination.current_page - 1)">
@@ -55,7 +55,8 @@
           </a>
         </li>
       </ul>
-    </nav>
+    </nav> -->
+    <Pagination :pages="pagination" @emitPages="getPorducts"></Pagination>
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
@@ -167,8 +168,12 @@
 
 <script>
 import $ from 'jquery';
+import Pagination from '../Pagination';
 
 export default {
+  components: {
+    Pagination,
+  },
   data() {
     return {
       products: [],
