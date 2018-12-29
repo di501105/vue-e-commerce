@@ -6,6 +6,7 @@ import Shopping from '@/components/pages/Shopping';
 import Dashboard from '@/components/pages/Dashboard';
 import Login from '@/components/pages/Login';
 import Products from '@/components/pages/Products';
+import ProductDetail from '@/components/pages/ProductDetail';
 import Cart from '@/components/pages/Cart';
 import Checkout from '@/components/pages/Checkout';
 import Order from '@/components/pages/Order';
@@ -36,6 +37,11 @@ export default new Router({
       path: '/shopping',
       name: 'Shopping',
       component: Shopping
+    },
+    {
+      path: '/shopping/:productId',
+      name: 'ProductDetail',
+      component: ProductDetail
     },
     {
       path: '/login',

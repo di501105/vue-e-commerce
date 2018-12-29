@@ -19,10 +19,10 @@
                 </label>
               </div>
             </div>
-            <div class="product-body text-center d-flex">
+            <router-link class="product-body text-center d-flex" to="">
               <div class="product-name col">{{ item.title }}</div>
               <strong class="product-price col">NT$ {{ item.price }}</strong>
-            </div>
+            </router-link>
             <a href="#" class="btn btn-primary-lighter btn-block btn-xl" @click.prevent="addtoCart(item.id)">加入購物車</a>
           </div>
         </div>
@@ -91,16 +91,6 @@ export default {
       vm.isLoading = true;
       this.$http.get(url).then((response) => {
         vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
-    },
-    removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        vm.getCart();
         console.log(response);
         vm.isLoading = false;
       });

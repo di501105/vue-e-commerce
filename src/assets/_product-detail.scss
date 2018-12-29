@@ -1,0 +1,30 @@
+.detail-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  .detail-image {
+    max-width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+  }
+  .detail-body {
+    border: 1px solid $primary-200;
+  }
+
+  .detail-tag {
+    writing-mode: vertical-lr;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    padding: 15px 10px;
+    background-color: $primary;
+    color: white;
+    letter-spacing: 5px;
+  }
+  .detail-favorite {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+  }
+}

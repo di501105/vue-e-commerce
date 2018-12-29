@@ -18,7 +18,7 @@
           <div class="sticky-top" style="top: 20px;">
             <h2 class="h4 font-weight-bold bg-primary text-white text-center mb-0 py-2">甜點類別</h2>
           <ul class="list-group text-center mb-5 sticky-top">
-            <!-- <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" @click.prevent="category = '所有甜點'; getProducts()">所有甜點</a> -->
+            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '所有甜點'}" @click.prevent="category = '所有甜點'; getProducts()">所有甜點</a>
             <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === item}" v-for="item in categoryList" :key="item" @click.prevent="category = item; getProducts()">{{ item }}</a>
           </ul>
           </div>
@@ -42,11 +42,11 @@
                     </label>
                   </div>
                 </div>
-                <div class="product-body text-center d-flex">
+                <router-link class="product-body text-center d-flex" :to="`/shopping/${item.id}`">
                   <div class="product-name col">{{ item.title }}</div>
                   <strong class="product-price col">NT$ {{ item.price }}</strong>
-                </div>
-                <a href="#" class="btn btn-primary-lighter btn-block btn-xl"
+                </router-link>
+                <a href="#" class="btn btn-primary-lighter btn-block btn-xl mt-0"
                 @click.prevent="addtoCart(item.id)">加入購物車</a>
               </div>
             </div>
@@ -65,7 +65,6 @@
 
 
 <script>
-import $ from 'jquery';
 import HomeNavbar from '../HomeNavbar';
 import Footer from '../Footer';
 import Pagination from '../Pagination';
@@ -110,20 +109,9 @@ export default {
       const categoryList = new Set();
       vm.products.forEach((item, i) => {
         categoryList.add(item.category);
-        categoryList.add('所有甜點');
       });
       console.log(categoryList);
       vm.categoryList = Array.from(categoryList).sort();
-    },
-    getProduct(id) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/product/${id}`;
-      vm.status.loadingItem = id;
-      this.$http.get(url).then((response) => {
-        vm.product = response.data.product;
-        $('#productModal').modal('show');
-        vm.status.loadingItem = '';
-      });
     },
     addtoCart(id, qty = 1) {
       const vm = this;
@@ -135,7 +123,6 @@ export default {
       };
       this.$http.post(url, {data:cart}).then((response) => {
         console.log(response);
-        $('#productModal').modal('hide');
         vm.status.loadingItem = '';
         vm.getCart();
       });
@@ -165,8 +152,6 @@ export default {
   },
   created() {
     this.getProducts();
-    this.getCart();
-
   },
 }
 </script>

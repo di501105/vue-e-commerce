@@ -56,7 +56,7 @@
         </li>
       </ul>
     </nav> -->
-    <Pagination :pages="pagination" @emitPages="getPorducts"></Pagination>
+    <Pagination :pages="pagination" @emitPages="getPorducts" v-if="pagination"></Pagination>
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
