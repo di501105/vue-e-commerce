@@ -19,7 +19,7 @@
                 </label>
               </div>
             </div>
-            <router-link class="product-body text-center d-flex" to="">
+            <router-link class="product-body text-center d-flex" :to="`/shopping/${item.id}`">
               <div class="product-name col">{{ item.title }}</div>
               <strong class="product-price col">NT$ {{ item.price }}</strong>
             </router-link>
@@ -34,17 +34,14 @@
 
 
 <script>
-import $ from 'jquery';
 
 export default {
   data() {
     return {
       products: [],
-      product: {},
       status: {
         loadingItem: '',
       },
-      cart: {},
       isLoading: false,
     };
   },
@@ -59,17 +56,6 @@ export default {
         vm.isLoading = false;
       });
     },
-    getProduct(id) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/product/${id}`;
-      vm.status.loadingItem = id;
-      this.$http.get(url).then((response) => {
-        vm.product = response.data.product;
-        $('#productModal').modal('show');
-        console.log(response);
-        vm.status.loadingItem = '';
-      });
-    },
     addtoCart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
@@ -80,26 +66,12 @@ export default {
       };
       this.$http.post(url, {data:cart}).then((response) => {
         console.log(response);
-        $('#productModal').modal('hide');
         vm.status.loadingItem = '';
-        vm.getCart();
-      });
-    },
-    getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
       });
     },
   },
   created() {
     this.getProducts();
-    this.getCart();
-
   },
 }
 </script>

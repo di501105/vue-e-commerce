@@ -6,21 +6,21 @@
         <div class="row no-gutters justify-content-center rectangle-section">
           <div class="col-md-10">
             <div class="row no-gutters">
-              <a href="#" class="col-4 rectangle-image-wrap active">
+              <router-link to="/shopping" class="col-4 rectangle-image-wrap active">
                 <span class="rectangle-text">本日精選</span>
                 <div class="four-sides rectangle-over z-index--1"></div>
                 <div class="bg-cover rectangle-image" style="background-image: url(https://images.unsplash.com/photo-1490914327627-9fe8d52f4d90?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=73ed228f25bdefd2291c242f6d390fca&auto=format&fit=crop&w=600&q=60)"></div>
-              </a>
-              <a href="#" class="col-4 rectangle-image-wrap">
+              </router-link>
+              <router-link to="/shopping" class="col-4 rectangle-image-wrap">
                 <span class="rectangle-text">人氣推薦</span>
                 <div class="four-sides rectangle-over z-index--1"></div>
                 <div class="bg-cover rectangle-image" style="background-image: url(https://images.unsplash.com/photo-1504114133367-631ecd3db3ca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b75e93d90cd88467ae5715becb431a26&auto=format&fit=crop&w=600&q=60)"></div>
-              </a>
-              <a href="#" class="col-4 rectangle-image-wrap">
+              </router-link>
+              <router-link to="/shopping" class="col-4 rectangle-image-wrap">
                 <span class="rectangle-text">新品上市</span>
                 <div class="four-sides rectangle-over z-index--1"></div>
                 <div class="bg-cover rectangle-image" style="background-image: url(https://images.unsplash.com/photo-1499638472904-ea5c6178a300?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c27da96f7150c96a92ba8a53c8644761&auto=format&fit=crop&w=600&q=60)"></div>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <HomeNavbar/>
+    <loading :active.sync="isLoading"></loading>
     <div class="container">
       <div class="row mb-7">
         <div class="col-md-8">
@@ -25,7 +26,7 @@
         <div class="col-md-4">
             <h1 class="h2">{{ product.title }}</h1>
             <div class="d-flex justify-content-end align-items-end">
-              <del class="text-muted">原價 {{ product.origin_price | currency }}</del>
+              <del class="text-primary-100">原價 {{ product.origin_price | currency }}</del>
               <div class="h3 ml-auto mb-0 text-danger">
                 <small>特價 </small>
                 <strong>{{ product.price | currency }}</strong>
@@ -68,8 +69,8 @@ export default {
   data() {
     return {
       product: [],
-      productId:'',
-      count:0,
+      productId: '',
+      count: 1,
       status: {
         loadingItem: '',
       },
@@ -95,24 +96,15 @@ export default {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
       vm.status.loadingItem = id;
+      vm.isLoading = true;
       const cart = {
         product_id: id,
         qty,
       };
       this.$http.post(url, {data: cart}).then((response) => {
+        vm.isLoading = false;
         console.log(response);
         vm.status.loadingItem = '';
-        vm.getCart();
-      });
-    },
-    getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
       });
     },
   },

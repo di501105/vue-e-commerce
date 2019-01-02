@@ -14,7 +14,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-4 px-0 px-md-1">
+        <div class="col-lg-4 px-0 px-md-1">
           <div class="sticky-top" style="top: 20px;">
             <h2 class="h4 font-weight-bold bg-primary text-white text-center mb-0 py-2">甜點類別</h2>
           <ul class="list-group text-center mb-5 sticky-top">
@@ -24,7 +24,7 @@
           </div>
           
         </div>
-        <div class="col-md-8">
+        <div class="col-lg-8">
           <div class="row">
             <div class="col-md-6 mb-5 mb-md-3" v-for="item in filterData" :key="item.id">
               <div class="product-card">
@@ -78,7 +78,6 @@ export default {
   data() {
     return {
       products: [],
-      product: {},
       category: '所有甜點',
       categoryList: [],
       pagination: {},

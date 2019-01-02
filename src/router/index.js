@@ -11,6 +11,7 @@ import Cart from '@/components/pages/Cart';
 import Checkout from '@/components/pages/Checkout';
 import Order from '@/components/pages/Order';
 import Coupons from '@/components/pages/Coupons';
+import OrderList from '@/components/pages/OrderList';
 import CustomerOrder from '@/components/pages/CustomerOrder';
 import CustomerCheckout from '@/components/pages/CustomerCheckout';
 
@@ -69,15 +70,21 @@ export default new Router({
       component: Dashboard,
       children: [
         {
-          path: 'Products',
+          path: 'products',
           name: 'Products',
           component: Products,
           meta: { requiresAuth: true },
         },
         {
-          path: 'Coupons',
+          path: 'coupons',
           name: 'Coupons',
           component: Coupons,
+          meta: { requiresAuth: true },
+        },
+        {
+          path: 'orderlist',
+          name: 'OrderList',
+          component: OrderList,
           meta: { requiresAuth: true },
         },
       ],

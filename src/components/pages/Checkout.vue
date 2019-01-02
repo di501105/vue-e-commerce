@@ -136,21 +136,6 @@ export default {
     };
   },
   methods: {
-    addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data:cart}).then((response) => {
-        console.log(response);
-        $('#productModal').modal('hide');
-        vm.status.loadingItem = '';
-        vm.getCart();
-      });
-    },
     getCart() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;

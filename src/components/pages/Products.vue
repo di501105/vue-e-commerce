@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
-      <button class="btn btn-primary" @click="openModal(true)">建立新的產品</button>
+      <button class="btn btn-primary" @click="openModal(true)" data-backdrop="static">建立新的產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -31,9 +31,8 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDelProductModal(item)"
-              >刪除</button>
+              <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)" data-backdrop="static">編輯</button>
+              <button class="btn btn-outline-danger btn-sm" @click="openDelProductModal(item)">刪除</button>
             </div>
           </td>
         </tr>
@@ -57,7 +56,7 @@
       </ul>
     </nav> -->
     <Pagination :pages="pagination" @emitPages="getPorducts" v-if="pagination"></Pagination>
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">

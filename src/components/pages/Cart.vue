@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <HomeNavbar/>
     <section class="container">
-      <div class="jumbotron text-center" v-if="cart.carts.length === 0">
+      <div class="jumbotron text-center" v-if="cart.carts && cart.carts.length === 0">
         <div class="h2 mb-5">購物車內無商品</div>
         <router-link class="btn btn-minor btn-xl text-primary font-weight-bold" to="/shopping">前往商城選購</router-link>
       </div>
@@ -86,21 +86,6 @@ export default {
     };
   },
   methods: {
-    addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data:cart}).then((response) => {
-        console.log(response);
-        $('#productModal').modal('hide');
-        vm.status.loadingItem = '';
-        vm.getCart();
-      });
-    },
     getCart() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
@@ -132,26 +117,6 @@ export default {
         console.log(response);
         this.getCart();
         vm.isLoading = false;
-      });
-    },
-    createOrder() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/order`;
-      const order = vm.form;
-      // vm.isLoading = true;
-      this.$validator.validate().then((result) => {
-        if (result) {
-          this.$http.post(url, {data:order}).then((response) => {
-            console.log('訂單已建立', response);
-            if (response.data.success) {
-              vm.$router.push(`/customer_checkout/${response.data.orderId}`)
-            }
-            // this.getCart();
-            vm.isLoading = false;
-          });
-        } else {
-          console.log('欄位不完整');
-        }
       });
     },
   },
