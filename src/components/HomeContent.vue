@@ -30,7 +30,7 @@
     <section class="section mt-lg-8 mb-lg-9">
       <div class="row no-gutters justify-content-center d-lg-none">
         <div class="col-6">
-          <img src="../assets/images/sm-橫式-為什麼選擇了做甜點.svg" class="img-fluid my-5" alt="">
+          <img src="static/images/sm-橫式-為什麼選擇了做甜點.svg" class="img-fluid my-5" alt="">
         </div>
       </div>
 
@@ -46,7 +46,7 @@
                 <p class="mb-0">是非成敗轉頭空，滾滾長江東逝水，白髮漁樵江渚上，古今多少事，都付笑談中。</p>
               </div>
               <div class="section-overflow-block d-none d-lg-block">
-                <img src="../assets/images/lg-為什麼選擇了做甜點.svg" width="88" alt="">
+                <img src="static/images/lg-為什麼選擇了做甜點.svg" width="88" alt="">
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
     <section class="section mb-lg-8">
       <div class="row no-gutters justify-content-center d-lg-none">
         <div class="col-6">
-          <img src="../assets/images/sm-橫式-為什麼一定要吃甜點.svg" class="img-fluid my-5" alt="">
+          <img src="static/images/sm-橫式-為什麼一定要吃甜點.svg" class="img-fluid my-5" alt="">
         </div>
       </div>
 
@@ -73,7 +73,7 @@
                 <p class="mb-0">是非成敗轉頭空，滾滾長江東逝水，白髮漁樵江渚上，古今多少事，都付笑談中。</p>
               </div>
               <div class="section-overflow-block d-none d-lg-block">
-                <img src="../assets/images/lg-為什麼一定要吃甜點.svg" width="88" alt="">
+                <img src="static/images/lg-為什麼一定要吃甜點.svg" width="88" alt="">
               </div>
             </div>
           </div>
@@ -82,8 +82,8 @@
     </section>
 
     <section class="text-center my-5 mb-lg-8">
-      <img src="../assets/images/sm-橫式-想吃甜點是不需要理由的.svg" class="intro-max-width d-lg-none" alt="">
-      <img src="../assets/images/lg-想吃甜點是不需要理由的.svg" class="img-fluid d-none d-lg-inline-block" width="88" alt="">
+      <img src="static/images/sm-橫式-想吃甜點是不需要理由的.svg" class="intro-max-width d-lg-none" alt="">
+      <img src="static/images/lg-想吃甜點是不需要理由的.svg" class="img-fluid d-none d-lg-inline-block" width="88" alt="">
     </section>
   </div>
 </template>

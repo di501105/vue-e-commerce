@@ -6,8 +6,8 @@
           <i class="material-icons">menu</i>
         </button>
         <router-link class="navbar-brand" to="/">
-          <img src="../assets/images/logo-all-dark.svg" width="220" height="40" alt="" class="d-none d-md-inline-block">
-          <img src="../assets/images/logotype-sm-dark.svg" width="114" height="18" alt="" class="d-inline-block d-md-none">
+          <img src="static/images/logo-all-dark.svg" width="220" height="40" alt="" class="d-none d-md-inline-block">
+          <img src="static/images/logotype-sm-dark.svg" width="114" height="18" alt="" class="d-inline-block d-md-none">
         </router-link>
         <router-link class="nav-link d-flex align-items-center order-md-1 btn-cart" to="/cart">
           <i class="material-icons">shopping_cart</i>
