@@ -68,6 +68,9 @@ export default {
     },
   },
   computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
     sortOrder() {
       const vm = this;
       let newOrder = [];

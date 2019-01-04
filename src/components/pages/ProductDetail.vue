@@ -60,6 +60,7 @@
 <script>
 import HomeNavbar from '../HomeNavbar';
 import Footer from '../Footer';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -71,42 +72,29 @@ export default {
       product: [],
       productId: '',
       count: 1,
-      status: {
-        loadingItem: '',
-      },
-      isLoading: false,
     };
   },
   methods: {
     getProduct(id) {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/product/${vm.productId}`;
-      vm.status.loadingItem = id;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.get(url).then((response) => {
         if (response.data.success) {
           console.log(response)
           vm.product = response.data.product;
-          vm.status.loadingItem = '';
+          vm.$store.dispatch('updateLoading', false);
         } else {
           console.log(response.data.message);
         }
       });
     },
     addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      vm.isLoading = true;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data: cart}).then((response) => {
-        vm.isLoading = false;
-        console.log(response);
-        vm.status.loadingItem = '';
-      });
+      this.$store.dispatch('addtoCart', {id, qty});
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading']),
   },
   created() {
     this.productId = this.$route.params.productId;

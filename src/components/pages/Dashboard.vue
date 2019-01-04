@@ -2,10 +2,9 @@
   <div>
     <Navbar/>
     <Alert/>
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
-        <Sidebar/>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col px-4">
           <router-view></router-view>
         </main>
       </div>
@@ -14,13 +13,11 @@
 </template>
 
 <script>
-import Sidebar from '../Sidebar';
 import Navbar from '../Navbar';
 import Alert from '../AlertMessage'
 
 export default {
   components: {
-    Sidebar,
     Navbar,
     Alert,
   },

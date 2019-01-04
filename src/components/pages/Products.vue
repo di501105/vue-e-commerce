@@ -168,6 +168,7 @@
 <script>
 import $ from 'jquery';
 import Pagination from '../Pagination';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -175,11 +176,8 @@ export default {
   },
   data() {
     return {
-      products: [],
-      pagination: {},
       tempProduct: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false,
       },
@@ -187,16 +185,8 @@ export default {
   },
   methods: {
     getPorducts(page = 1) {
-      const api = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/admin/products?page=${page}`;
-      const vm = this;
-      console.log(process.env.APIPATH, process.env.CUSTOMPATH);
-      vm.isLoading = true;
-      this.$http.get(api).then((response) => {
-        console.log(response.data);
-        vm.isLoading = false;
-        vm.products = response.data.products;
-        vm.pagination = response.data.pagination;
-      });
+      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/admin/products?page=${page}`;
+      this.$store.dispatch('getProducts', url);
     },
     openModal(isNew, item) {
       if (isNew) {
@@ -238,11 +228,11 @@ export default {
     delProduct() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.delete(url).then((response) => {
         console.log(response.data, vm.tempProduct);
         $('#delProductModal').modal('hide');
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
         this.getPorducts();
       });
     },
@@ -270,6 +260,9 @@ export default {
         }
       });
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading', 'products', 'pagination']),
   },
   created() {
     this.getPorducts();

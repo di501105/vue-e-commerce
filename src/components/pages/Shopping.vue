@@ -6,7 +6,7 @@
       <header class="header">
         <div class="bg-cover header-main-image" style="background-image: url(https://images.unsplash.com/photo-1512484457149-266d165a4eca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=786581a33fd6c9343735655439ce2e5a&auto=format&fit=crop&w=800&q=60)">
           <h1 class="text-hide">Sweetaste 甜點
-            <img src="images/lg-想吃甜點是不需要理由的.svg" class="header-image-slogan" width="89" alt="">
+            <img src="static/images/lg-想吃甜點是不需要理由的.svg" class="header-image-slogan" width="89" alt="">
           </h1>
         </div>
       </header>
@@ -19,7 +19,10 @@
             <h2 class="h4 font-weight-bold bg-primary text-white text-center mb-0 py-2">甜點類別</h2>
           <ul class="list-group text-center mb-5 sticky-top">
             <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '所有甜點'}" @click.prevent="category = '所有甜點'; getProducts()">所有甜點</a>
-            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === item}" v-for="item in categoryList" :key="item" @click.prevent="category = item; getProducts()">{{ item }}</a>
+            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '人氣商品'}" @click.prevent="category = '人氣商品'; getProducts()">人氣商品</a>
+            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '新品上市'}" @click.prevent="category = '新品上市'; getProducts()">新品上市</a>
+            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '本日精選'}" @click.prevent="category = '本日精選'; getProducts()">本日精選</a>
+            <!-- <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === item}" v-for="item in categoryList" :key="item" @click.prevent="category = item; getProducts()">{{ item }}</a> -->
           </ul>
           </div>
           
@@ -68,6 +71,7 @@
 import HomeNavbar from '../HomeNavbar';
 import Footer from '../Footer';
 import Pagination from '../Pagination';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -77,67 +81,37 @@ export default {
   },
   data() {
     return {
-      products: [],
       category: '所有甜點',
-      categoryList: [],
-      pagination: {},
-      status: {
-        loadingItem: '',
-      },
-      cart: {},
-      isLoading: false,
     };
   },
   methods: {
     getProducts(page = 1) {
-      const vm = this;
-      let url = vm.category === '所有甜點'
+      let url = this.category === '所有甜點'
         ?`${process.env.APIPATH}api/${process.env.CUSTOMPATH}/products?page=${page}`
         :`${process.env.APIPATH}api/${process.env.CUSTOMPATH}/products/all`; 
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.products = response.data.products;
-        vm.pagination = response.data.pagination;
-        vm.getCategoryList();
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getProducts', url);
     },
-    getCategoryList() {
-      const vm = this;
-      const categoryList = new Set();
-      vm.products.forEach((item, i) => {
-        categoryList.add(item.category);
-      });
-      console.log(categoryList);
-      vm.categoryList = Array.from(categoryList).sort();
-    },
+    // getCategoryList() {
+    //   const vm = this;
+    //   const categoryList = new Set();
+    //   vm.products.forEach((item, i) => {
+    //     categoryList.add(item.category);
+    //   });
+    //   console.log(categoryList);
+    //   vm.categoryList = Array.from(categoryList).sort();
+    // },
     addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data:cart}).then((response) => {
-        console.log(response);
-        vm.status.loadingItem = '';
-        vm.getCart();
-      });
+      this.$store.dispatch('addtoCart', {id, qty});
     },
     getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getCart');
     },
   },
   computed: {
+    ...mapGetters(['isLoading', 'products', 'pagination', 'cart']),
+    // categoryList() {
+    //   return this.$store.state.categoryList;
+    // },
     filterData() {
       const vm = this;
       return vm.products.filter((item) => {

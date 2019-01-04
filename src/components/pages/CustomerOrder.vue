@@ -156,11 +156,11 @@
 
 <script>
 import $ from 'jquery';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      products: [],
       product: {},
       status: {
         loadingItem: '',
@@ -174,8 +174,6 @@ export default {
         },
       message: '',
       },
-      cart: {},
-      isLoading: false,
       coupon_code: '',
     };
   },
@@ -183,12 +181,7 @@ export default {
     getProducts() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/products`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getProducts', url);
     },
     getProduct(id) {
       const vm = this;
@@ -202,39 +195,13 @@ export default {
       });
     },
     addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data:cart}).then((response) => {
-        console.log(response);
-        $('#productModal').modal('hide');
-        vm.status.loadingItem = '';
-        vm.getCart();
-      });
+      this.$store.dispatch('addtoCart', {id, qty});
     },
     getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getCart');
     },
     removeCartItem(id) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart/${id}`;
-      vm.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        vm.getCart();
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('removeCartItem', id);
     },
     addCouponCode() {
       const vm = this;
@@ -242,18 +209,18 @@ export default {
       const coupon = {
         code: vm.coupon_code,
       };
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.post(url, {data:coupon}).then((response) => {
         console.log(response);
         this.getCart();
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     createOrder() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/order`;
       const order = vm.form;
-      // vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$validator.validate().then((result) => {
         if (result) {
           this.$http.post(url, {data:order}).then((response) => {
@@ -262,13 +229,16 @@ export default {
               vm.$router.push(`/dashboard/customer_checkout/${response.data.orderId}`)
             }
             // this.getCart();
-            vm.isLoading = false;
+            vm.$store.dispatch('updateLoading', false);
           });
         } else {
           console.log('欄位不完整');
         }
       });
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading', 'products', 'cart']),
   },
   created() {
     this.getProducts();

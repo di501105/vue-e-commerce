@@ -111,6 +111,7 @@
 <script>
 import HomeNavbar from '../HomeNavbar';
 import Footer from '../Footer';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -130,27 +131,18 @@ export default {
           address: '',
         },
       },
-      cart: {},
-      isLoading: false,
       coupon_code: '',
     };
   },
   methods: {
     getCart() {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getCart');
     },
     createOrder() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/order`;
       const order = vm.form;
-      // vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$validator.validate().then((result) => {
         if (result) {
           this.$http.post(url, {data:order}).then((response) => {
@@ -158,14 +150,16 @@ export default {
             if (response.data.success) {
               vm.$router.push(`/order/${response.data.orderId}`)
             }
-            // this.getCart();
-            vm.isLoading = false;
+            vm.$store.dispatch('updateLoading', false);
           });
         } else {
           console.log('欄位不完整');
         }
       });
     },
+  },
+  computed: {
+    ...mapGetters(['isLoading', 'cart']),
   },
   created() {
     this.getCart();

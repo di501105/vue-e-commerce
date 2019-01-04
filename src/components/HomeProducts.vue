@@ -36,39 +36,22 @@
 <script>
 
 export default {
-  data() {
-    return {
-      products: [],
-      status: {
-        loadingItem: '',
-      },
-      isLoading: false,
-    };
-  },
   methods: {
     getProducts() {
-      const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/products`;
-      vm.isLoading = true;
-      this.$http.get(url).then((response) => {
-        vm.products = response.data.products;
-        console.log(response);
-        vm.isLoading = false;
-      });
+      this.$store.dispatch('getProducts', url);
     },
     addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/cart`;
-      vm.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      this.$http.post(url, {data:cart}).then((response) => {
-        console.log(response);
-        vm.status.loadingItem = '';
-      });
+      this.$store.dispatch('addtoCart', {id, qty});
     },
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.isLoading;
+    },
+    products() {
+      return this.$store.state.products;
+    }
   },
   created() {
     this.getProducts();
