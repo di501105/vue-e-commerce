@@ -34,6 +34,8 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
+
 
 export default {
   methods: {
@@ -46,12 +48,7 @@ export default {
     },
   },
   computed: {
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
-    products() {
-      return this.$store.state.products;
-    }
+    ...mapGetters(['isLoading', 'products']),
   },
   created() {
     this.getProducts();
