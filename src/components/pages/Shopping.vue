@@ -19,7 +19,7 @@
             <h2 class="h4 font-weight-bold bg-primary text-white text-center mb-0 py-2">甜點類別</h2>
           <ul class="list-group text-center mb-5 sticky-top">
             <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '所有甜點'}" @click.prevent="category = '所有甜點'; getProducts()">所有甜點</a>
-            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '人氣商品'}" @click.prevent="category = '人氣商品'; getProducts()">人氣商品</a>
+            <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '人氣推薦'}" @click.prevent="category = '人氣推薦'; getProducts()">人氣推薦</a>
             <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '新品上市'}" @click.prevent="category = '新品上市'; getProducts()">新品上市</a>
             <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === '本日精選'}" @click.prevent="category = '本日精選'; getProducts()">本日精選</a>
             <!-- <a href="#" class="h4 font-weight-bold list-group-item list-group-item-action" :class="{'active': category === item}" v-for="item in categoryList" :key="item" @click.prevent="category = item; getProducts()">{{ item }}</a> -->
