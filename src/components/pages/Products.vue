@@ -215,7 +215,7 @@ export default {
         } else {
           $('#productModal').modal('hide');
           vm.getPorducts();
-          console.log('新增失敗');
+          vm.$store.dispatch('updateMessage', {message: response.data.message, status: 'danger'});
         }
         // vm.products = response.data.products;
       });
@@ -255,8 +255,10 @@ export default {
           // vm.tempProduct.imageUrl = response.data.imageUrl;
           // console.log(vm.tempProduct);
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+          vm.$store.dispatch('updateMessage', {message: '上傳成功', status: 'success'});
         } else {
-          this.$bus.$emit('message:push', response.data.message, 'danger');
+          vm.$store.dispatch('updateMessage', {message: response.data.message, status: 'danger'});
+          // this.$bus.$emit('message:push', response.data.message, 'danger');
         }
       });
     },

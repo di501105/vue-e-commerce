@@ -8,51 +8,29 @@
     </div>
   </div>
 </template>
+
+
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  name: 'Navbar',
-  data() {
-    return {
-      messages: [],
-    };
-  },
   methods: {
     updateMessage(message, status) {
-      const timestamp = Math.floor(new Date() / 1000);
-      this.messages.push({
-        message,
-        status,
-        timestamp,
-      });
-      this.removeMessageWithTiming(timestamp);
+      this.$store.dispatch('updateMessage', {message, status});
     },
-    removeMessage(num) {
-      this.messages.splice(num, 1);
+    removeMessage() {
+      this.$store.dispatch('removeMessage');
     },
     removeMessageWithTiming(timestamp) {
-      const vm = this;
-      setTimeout(() => {
-        vm.messages.forEach((item, i) => {
-          if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
-          }
-        });
-      }, 5000);
+      this.$store.dispatch('removeMessageWithTiming');
     },
   },
-  created() {
-    const vm = this;
-    // 自定義名稱 'message:push'
-    // message: 傳入參數
-    // status: 樣式，預設值為 warning
-    vm.$bus.$on('message:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status);
-    });
-    // vm.$bus.$emit('messsage:push');
+  computed: {
+    ...mapGetters(['messages']),
   },
 };
 </script>
-<style scope>
+<style scoped>
 .message-alert {
   position: fixed;
   max-width: 50%;

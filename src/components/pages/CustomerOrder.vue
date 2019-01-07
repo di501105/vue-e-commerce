@@ -44,8 +44,8 @@
           <div class="modal-body">
             <img :src="product.imageUrl" class="img-fluid" alt="">
             <blockquote class="blockquote mt-3">
-              <p class="mb-0">{{ product.content }}</p>
-              <footer class="blockquote-footer text-right">{{ product.description }}</footer>
+              <p class="mb-0">{{ product.description }}</p>
+              <footer class="blockquote-footer text-right">{{ product.content }}</footer>
             </blockquote>
             <div class="d-flex justify-content-between align-items-baseline">
               <div class="h4" v-if="!product.price">{{ product.origin_price }} 元</div>

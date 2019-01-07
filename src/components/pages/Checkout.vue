@@ -120,9 +120,6 @@ export default {
   },
   data() {
     return {
-      status: {
-        loadingItem: '',
-      },
       form:{
         user: {
           name: '',
@@ -150,10 +147,10 @@ export default {
             if (response.data.success) {
               vm.$router.push(`/order/${response.data.orderId}`)
             }
-            vm.$store.dispatch('updateLoading', false);
           });
         } else {
           console.log('欄位不完整');
+          vm.$store.dispatch('updateLoading', false);
         }
       });
     },

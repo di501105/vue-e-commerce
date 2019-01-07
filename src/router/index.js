@@ -30,7 +30,7 @@ export default new Router({
     //   meta: { requiresAuth: true }
     // },
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home
     },

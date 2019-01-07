@@ -114,23 +114,23 @@ export default {
     getOrder() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/order/${vm.orderId}`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.get(url).then((response) => {
         vm.order = response.data.order;
         console.log(response);
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
     payOrder() {
       const vm = this;
       const url = `${process.env.APIPATH}api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
+      vm.$store.dispatch('updateLoading', true);
       this.$http.post(url).then((response) => {
         console.log(response);
         if (response.data.success) {
           this.getOrder();
         }
-        vm.isLoading = false;
+        vm.$store.dispatch('updateLoading', false);
       });
     },
   },

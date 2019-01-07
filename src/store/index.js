@@ -15,6 +15,7 @@ export default new Vuex.Store({
     cart: {
       carts: [],
     },
+    messages: [],
     // categoryList: [],
   },
   actions: {
@@ -47,7 +48,6 @@ export default new Vuex.Store({
       axiox.delete(url).then((response) => {
         context.dispatch('getCart');
         console.log(response);
-        context.commit('LOADING', false);
       });
     },
     addtoCart(context, {id, qty}) {
@@ -62,6 +62,27 @@ export default new Vuex.Store({
         context.dispatch('getCart');
         console.log(response);
       });
+    },
+    updateMessage(context, {message, status}) {
+      const timestamp = Math.floor(new Date() / 1000);
+      context.commit('PUSH_MESSAGE', {
+        message,
+        status,
+        timestamp,
+      });
+      context.dispatch('removeMessageWithTiming', timestamp);
+    },
+    removeMessage(context) {
+      context.commit('REMOVE_MESSAGE');
+    },
+    removeMessageWithTiming(context, timestamp) {
+      setTimeout(() => {
+        context.state.messages.forEach((item, i) => {
+          if (item.timestamp === timestamp) {
+            context.commit('REMOVE_MESSAGE', i);
+          }
+        });
+      }, 5000);
     },
   },
   mutations: {
@@ -85,11 +106,18 @@ export default new Vuex.Store({
     CART(state, payload) {
       state.cart = payload;
     },
+    PUSH_MESSAGE(state, message) {
+      state.messages.push(message);
+    },
+    REMOVE_MESSAGE(state, i) {
+      state.messages.splice(i, 1);
+    },
   },
   getters: {
     isLoading: state => state.isLoading,
     products: state => state.products,
     pagination: state => state.pagination,
     cart: state => state.cart,
+    messages: state => state.messages,
   },
 });

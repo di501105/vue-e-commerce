@@ -13,7 +13,6 @@ import zhTWValidate from 'vee-validate/dist/locale/zh_TW';
 import App from './App';
 import router from './router';
 import store from './store';
-import './bus';
 import currencyFilter from './filters/currency';
 import dateFilter from './filters/date';
 
