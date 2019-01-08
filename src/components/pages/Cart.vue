@@ -12,7 +12,7 @@
           <h1 class="h4 bg-primary-200 text-center font-weight-bold py-2 mb-0">
             您的購物車
           </h1>
-          <div class="cart-row d-flex flex-column flex-md-row pt-3 py-md-3" v-for="item in cart.carts" :key="item.id" v-if="cart.carts">
+          <div class="cart-row d-flex flex-column flex-md-row pt-3 py-md-3" v-for="item in cart.carts" :key="item.id">
             <div class="d-flex align-items-center flex-grow-1">
               <div class="flex-grow-1 flex-md-grow-0 mr-2 mr-md-6">
                 <div class="cart-image" :style="{backgroundImage: `url(${item.product.imageUrl})`}"></div>

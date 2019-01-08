@@ -80,8 +80,8 @@
             <th>數量</th>
             <th>單價</th>
           </thead>
-          <tbody>
-            <tr v-for="item in cart.carts" :key="item.id" v-if="cart.carts">
+          <tbody v-if="cart.carts">
+            <tr v-for="item in cart.carts" :key="item.id">
               <td class="align-middle">
                 <button type="button" class="btn btn-outline-danger btn-sm" @click="removeCartItem(item.id)">
                   <i class="far fa-trash-alt"></i>
@@ -155,8 +155,8 @@
 </template>
 
 <script>
-import $ from 'jquery';
 import { mapGetters } from 'vuex';
+import $ from 'jquery';
 
 export default {
   data() {

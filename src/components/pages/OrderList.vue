@@ -11,8 +11,8 @@
           <th>是否付款</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(item, key) in sortOrder" :key="key" v-if="orders.length" :class="{'text-secondary': !item.is_paid}">
+      <tbody v-if="orders.length">
+        <tr v-for="(item, key) in sortOrder" :key="key" :class="{'text-secondary': !item.is_paid}">
           <td>{{ item.create_at | date }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
@@ -40,6 +40,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 import Pagination from '../Pagination';
 
 export default {
@@ -68,9 +69,6 @@ export default {
     },
   },
   computed: {
-    isLoading() {
-      return this.$store.state.isLoading;
-    },
     sortOrder() {
       const vm = this;
       let newOrder = [];
@@ -83,6 +81,7 @@ export default {
       }
       return newOrder;
     },
+    ...mapGetters(['isLoading']),
   },
   created() {
     this.getOrders();
